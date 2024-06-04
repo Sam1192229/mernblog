@@ -18,10 +18,9 @@ const secret = process.env.SECRET_KEY || 'asdfe45we45w345wegw345werjktjwertkj';
 const PORT = process.env.PORT || 4000;
 
 // Middleware setup
-app.use(cors());
-// Allow specific origin(s)
+
 app.use(cors({
-  origin: 'https://mernblog-steel.vercel.app/'
+  origin: 'https://mernblog-client.vercel.app/'
 }));
 
 
