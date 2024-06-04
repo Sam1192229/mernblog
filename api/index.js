@@ -20,7 +20,8 @@ const PORT = process.env.PORT || 4000;
 // Middleware setup
 
 app.use(cors({
-  origin: 'https://mernblog-client.vercel.app'
+  origin: 'https://mernblog-client.vercel.app',
+  credentials: true,
 }));
 
 
