@@ -36,7 +36,7 @@ export default function PostPage() {
         </div>
       )}
       <div className="image">
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt="" className="w-96 h-auto rounded-lg shadow-md mb-4" />
+        <img src={`https://mernblog-api-one.vercel.app/${postInfo.cover}`} alt="" className="w-96 h-auto rounded-lg shadow-md mb-4" />
       </div>
       <div className="content ml-20 mr-20 mb-20 text-wrap" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
     </div>
