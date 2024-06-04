@@ -18,11 +18,13 @@ const secret = process.env.SECRET_KEY || 'asdfe45we45w345wegw345werjktjwertkj';
 const PORT = process.env.PORT || 4000;
 
 // Middleware setup
+app.use(cors());
+// Allow specific origin(s)
 app.use(cors({
-  credentials: true,
-  // origin: '*'
-  origin: 'http://localhost:5173'
+  origin: 'https://mernblog-steel.vercel.app/'
 }));
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
