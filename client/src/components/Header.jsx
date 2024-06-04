@@ -6,7 +6,7 @@ export default function Header() {
   //context to set a global value for the header
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch("http://localhost:4000/profile", {
+    fetch("https://mernblog-api-one.vercel.app/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -16,7 +16,7 @@ export default function Header() {
   }, []);
 
   function logout() {
-    fetch("http://localhost:4000/logout", {
+    fetch("https://mernblog-api-one.vercel.app/logout", {
       credentials: "include",
       method: "POST",
     });
