@@ -15,7 +15,7 @@ export default function Post({
       <div className="image">
         <Link to={`/post/${_id}`}>
           <img
-            src={`http://localhost:4000/${cover}`}
+            src={`https://mernblog-api-one.vercel.app/${cover}`}
             alt=""
             className=" w-96 h-auto border-2 border-white"
           />
