@@ -18,13 +18,11 @@ const secret = process.env.SECRET_KEY || 'asdfe45we45w345wegw345werjktjwertkj';
 const PORT = process.env.PORT || 4000;
 
 // Middleware setup
-
 app.use(cors({
   origin: 'https://mernblog-client.vercel.app',
-  methods: ["POST","GET","PUT"],
+  methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
 }));
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -54,10 +52,7 @@ app.post('/register', async (req, res) => {
   const { username, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const userDoc = await User.create({
-      username,
-      password: hashedPassword,
-    });
+    const userDoc = await User.create({ username, password: hashedPassword });
     res.json(userDoc);
   } catch (e) {
     console.log(e);
@@ -79,10 +74,7 @@ app.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ username, id: userDoc._id }, secret, {});
-    res.cookie('token', token, { httpOnly: true }).json({
-      id: userDoc._id,
-      username,
-    });
+    res.cookie('token', token, { httpOnly: true }).json({ id: userDoc._id, username });
   } catch (e) {
     console.error(e);
     res.status(500).json('Internal server error');
@@ -106,11 +98,7 @@ app.post('/post', uploadMiddleware.single('file'), verifyToken, async (req, res)
 
   const { title, summary, content } = req.body;
   const postDoc = await Post.create({
-    title,
-    summary,
-    content,
-    cover: newPath,
-    author: req.userId,
+    title, summary, content, cover: newPath, author: req.userId,
   });
   res.json(postDoc);
 });
@@ -178,11 +166,10 @@ app.delete('/post/:id', verifyToken, async (req, res) => {
   }
 });
 
-mongoose
-  .connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`App is listening to port : ${PORT}`);
+      console.log(`App is listening on port: ${PORT}`);
     });
     console.log("App connected to database");
   })
