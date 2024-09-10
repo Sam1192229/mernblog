@@ -15,7 +15,7 @@ export default function Post({
       <div className="image">
         <Link to={`/post/${_id}`}>
           <img
-            src={`https://mernblog-api-one.vercel.app/${cover}`}
+            src={`http://localhost:4000/${cover}`}
             alt=""
             className=" w-96 h-auto border-2 border-white"
           />
@@ -23,15 +23,15 @@ export default function Post({
       </div>
         <div className="texts flex flex-col gap-2 w-1/3">
           <Link to={`/post/${_id}`}>
-            <h2 className="text-teal-500 font-mono text-2xl">{title}</h2>
+            <h2 className="text-teal-800  font-serif text-3xl font-extrabold text-pretty drop-shadow-xl ">{title}</h2>
           </Link>
-          <p className="info text-mono text-gray-300">
+          <p className="info text-mono text-gray-800">
             {/* Conditional rendering to handle null or undefined author */}
-            {author && <a className="author">by {author.username}</a>}
+            {author && <a className="author font-bold">{author.username.toUpperCase()}</a>}
             <br />
             <time>{formatISO9075(new Date(createdAt))}</time>
           </p>
-          <p className="summary text-gray-300">{summary}</p>
+          <p className="summary text-gray-800 font-small font-serif">{summary}</p>
         </div>
     </div>
   );
