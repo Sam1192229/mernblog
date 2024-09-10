@@ -19,9 +19,9 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware setup
 app.use(cors({
-  origin: 'https://mernblog-client.vercel.app',
-  methods: ["POST", "GET", "PUT", "DELETE"],
   credentials: true,
+  origin: 'http://localhost:5173',
+  methods: ["POST", "GET", "PUT", "DELETE"]
 }));
 
 app.use(express.json());
@@ -98,7 +98,11 @@ app.post('/post', uploadMiddleware.single('file'), verifyToken, async (req, res)
 
   const { title, summary, content } = req.body;
   const postDoc = await Post.create({
-    title, summary, content, cover: newPath, author: req.userId,
+    title,
+    summary,
+    content,
+    cover: newPath,
+    author: req.userId,
   });
   res.json(postDoc);
 });
