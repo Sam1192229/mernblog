@@ -3,6 +3,9 @@ import 'react-quill/dist/quill.snow.css';
 import {useState} from "react";
 import {Navigate} from "react-router-dom";
 import Editor from "../components/Editor";
+import indexpic from '../assets/indexp2.avif';
+
+
 export default function CreatePost() {
   const [title,setTitle] = useState('');
   const [summary,setSummary] = useState('');
@@ -16,7 +19,7 @@ export default function CreatePost() {
     data.set('content', content);
     data.set('file', files[0]);
     ev.preventDefault();
-    const response = await fetch('https://mernblog-api-one.vercel.app/post', {
+    const response = await fetch('http://localhost:4000/post', {
       method: 'POST',
       body: data,
       credentials: 'include',
@@ -30,8 +33,16 @@ export default function CreatePost() {
     return <Navigate to={'/'} />
   }
   return (
-    <div className="max-w-lg mx-auto mt-8 mb-16">
-      <form onSubmit={createNewPost} className="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div className="w-3/5 mx-auto mt-8 mb-16"
+   
+    >
+      <form onSubmit={createNewPost} className="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4"
+       style={{
+        backgroundImage: `url(${indexpic})`, // Replace with your image path
+        backgroundSize: 'cover', // Cover the entire form area
+        backgroundPosition: 'center', // Center the image
+      }}
+      >
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
             Title
