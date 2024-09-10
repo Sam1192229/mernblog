@@ -1,6 +1,7 @@
 import {useContext, useState} from "react";
 import {Navigate} from "react-router-dom";
 import {UserContext} from "../UserContext";
+import blogImage from '../assets/temp.jfif';
 
 export default function LoginPage() {
   const [username,setUsername] = useState('');
@@ -9,7 +10,7 @@ export default function LoginPage() {
   const {setUserInfo} = useContext(UserContext);
   async function login(ev) {
     ev.preventDefault();
-    const response = await fetch('https://mernblog-api-one.vercel.app/login', {
+    const response = await fetch('http://localhost:4000/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
@@ -29,8 +30,16 @@ export default function LoginPage() {
     return <Navigate to={'/'} />
   }
   return (
-    <form className="login register flex flex-col gap-8 items-center border-2 border-gray-500 mx-auto align-middle mt-44 w-72 rounded-2xl p-4 mb-20" onSubmit={login}>
-      <h1 className="text-center p-4 text-gray-200 text-3xl animate-fall">Login to add your post! ❤️</h1>
+    <form
+    className="login register flex flex-col gap-8 items-center border-2 border-gray-500 mx-auto align-middle mt-20 w-1/3 rounded-2xl p-20 "
+    onSubmit={login}
+    style={{
+      backgroundImage: `url(${blogImage})`, // Replace with your image path
+      backgroundSize: 'cover', // Cover the entire form area
+      backgroundPosition: 'center', // Center the image
+    }}
+  >
+      <h1 className="text-center p-4 text-gray-200 text-3xl animate-fall font-extrabold">Login to add your post! ❤️</h1>
       <input type="text"
       className="border-2 border-teal-500 p-2 w-64 rounded-md bg-gray-200"
              placeholder="username"
