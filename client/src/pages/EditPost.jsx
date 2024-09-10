@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Editor from "../components/Editor";
+import indexpic from '../assets/indexp2.avif';
 
 export default function EditPost() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function EditPost() {
   const [redirect2, setRedirect2] = useState(false);
 
   useEffect(() => {
-    fetch('https://mernblog-api-one.vercel.app/post/' + id)
+    fetch('http://localhost:4000/post/' + id)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -32,7 +33,7 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set('file', files?.[0]);
     }
-    const response = await fetch('https://mernblog-api-one.vercel.app/post', {
+    const response = await fetch('http://localhost:4000/post/', {
       method: 'PUT',
       body: data,
       credentials: 'include',
@@ -43,7 +44,7 @@ export default function EditPost() {
   }
 
   async function deletePost() {
-    const response = await fetch(`https://mernblog-api-one.vercel.app/post/${id}`, {
+    const response = await fetch(`http://localhost:4000/post/${id}`, {
       method: 'DELETE',
       credentials: 'include',
     });
@@ -60,7 +61,11 @@ export default function EditPost() {
   }
  
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="w-3/5 mx-auto mt-8 p-6 bg-white rounded-lg shadow-md" style={{
+      backgroundImage: `url(${indexpic})`, // Replace with your image path
+      backgroundSize: 'cover', // Cover the entire form area
+      backgroundPosition: 'center', // Center the image
+    }}>
       <form onSubmit={updatePost} className="space-y-4">
         <input
           type="text"
